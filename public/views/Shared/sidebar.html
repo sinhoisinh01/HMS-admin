@@ -1,1 +1,16 @@
-sidebar.html
+<section class="sidebar" ng-controller="LeftSidebarController">
+	<ul class="sidebar-menu tree" data-widget="tree">
+<!--     <li class="header">MAIN NAVIGATION</li> -->
+    <li class="treeview" ng-repeat="menu in menus" ng-click="onChose($event)">
+      <a href="">
+        <i class="{{menu.iconClass}}"></i> <span ng-bind="menu.title"></span>
+        <span class="pull-right-container">
+          <i class="fa fa-angle-left pull-right"></i>
+        </span>
+      </a>
+      <ul class="treeview-menu">
+        <li class="sub-treeview" ng-repeat="subMenu in menu.subMenus"><a href="{{subMenu.link}}"><i class="fa fa-circle-o"></i><span ng-bind="subMenu.title"></span></a></li>
+      </ul>
+    </li>
+  </ul>
+</section>
