@@ -12,6 +12,10 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::middleware("cORSFilter")->get("/supplier",'SupplierController@getAll');
+Route::get('/test', function (Request $request) {
+	return 'Test CorsFilter';
+})->middleware('cORSFilter');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

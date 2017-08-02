@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/template/skins/_all-skins.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper" ui-view="content">
+	<div class="wrapper" ui-view="main-content">
 
 	</div>
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -22,8 +22,18 @@
 	<script src="js/init/app.min.js"></script>
 	<script src="js/init/adminlte.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Init angular app -->
 	<script src="Scripts/app.js"></script>
+	<script src="Scripts/app.config.js"></script>
+	<!-- Provider  -->
+	<script src="Scripts/Providers/Helper.js"></script>
+	<!-- Factory -->
+	<script src="Scripts/Factories/API.factory.js"></script>
+	<script src="Scripts/Factories/Supplier.factory.js"></script>
+	<!-- Shared Controller -->
 	<script src="Scripts/Shared/LeftSidebar.js"></script>
+	<!-- Controller -->
 	<script src="Scripts/Controllers/IndexController.js"></script>
+	<script src="Scripts/Controllers/SupplierController.js"></script>
 </body>
 </html>

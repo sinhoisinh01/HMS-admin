@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return redirect('/index.html');
+    return redirect('/index.html#!');
 });
