@@ -5,20 +5,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dự Toán Xây Dựng</title>
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/template/AdminLTE.min.css">
-    <link rel="stylesheet" href="css/template/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="bower_components/select2/dist/css/select2.min.css">
+	<link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+	<link rel="stylesheet" href="css/template/AdminLTE.min.css">
+	<link rel="stylesheet" href="css/template/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="Styles/hms-style.css">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini fixed">
 	<div class="wrapper" ui-view="main-content">
-
+		
 	</div>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
 	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src="bower_components/angular-touch/angular-touch.min.js"></script>
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+	<script src="bower_components/ng-debounce/angular-debounce.js"></script>
+	<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
 	<script src="js/init/app.min.js"></script>
 	<script src="js/init/adminlte.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -30,10 +38,16 @@
 	<!-- Factory -->
 	<script src="Scripts/Factories/API.factory.js"></script>
 	<script src="Scripts/Factories/Supplier.factory.js"></script>
+	<script src="Scripts/Factories/Resource.factory.js"></script>
+	<script src="Scripts/Factories/Work.factory.js"></script>
+	<script src="Scripts/Factories/Quota.factory.js"></script>
 	<!-- Shared Controller -->
 	<script src="Scripts/Shared/LeftSidebar.js"></script>
 	<!-- Controller -->
 	<script src="Scripts/Controllers/IndexController.js"></script>
 	<script src="Scripts/Controllers/SupplierController.js"></script>
+	<script src="Scripts/Controllers/ResourceController.js"></script>
+	<script src="Scripts/Controllers/WorkController.js"></script>
+	<script src="Scripts/Controllers/QuotaController.js"></script>
 </body>
 </html>

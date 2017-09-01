@@ -1,17 +1,16 @@
 if("undefined" !== typeof app){
-	app.factory('Supplier',function(API, Helper){
+	app.factory('Quota',function(API, Helper){
         var apiName = {
-            "add" : "supplier",
-            "edit" : "supplier/$1",
-            "delete" : "supplier/$1",
-            "getOne" : "supplier/$1",
-            "getAll" : "supplier?index=$1&limit=$2",
-            "getPage" : "supplier/page/$1"
+            "add" : "quota",
+            "edit" : "work/$1/resrouce/$2/quota",
+            "delete" : "work/$1/resource/$2/quota/$1",
+            "getOne" : "work/$1/quota",
+            "getAll" : "quota?index=$1&limit=$2",
+            "getPage" : "quota/page/$1"
         };
 		return {
-            getOne(supplierId, cb){
-                console.log(apiName);
-                API.callAPI("get",Helper.fixUrlAPI(apiName.getOne,[supplierId])).then(function success(res){
+            getOne(workId, cb){
+                API.callAPI("get",Helper.fixUrlAPI(apiName.getOne,[workId])).then(function success(res){
                     cb(res.data);
                 }, function error(err){
                     cb([]);
@@ -31,23 +30,21 @@ if("undefined" !== typeof app){
                     cb(0);
                 });
             },
-            edit(supplierId, supplierName, supplierAddress, cb){
+            edit(workId, resourceId, quotaValue, cb){
                 var data = {
-                    name : supplierName,
-                    address : supplierAddress,
-                    user_id : 1
+                    value : quotaValue
                 }
-                API.callAPI("put", Helper.fixUrlAPI(apiName.edit,[supplierId]), data).then(function success(res){
+                API.callAPI("put", Helper.fixUrlAPI(apiName.edit,[workId, resourceId]), data).then(function success(res){
                     cb(res.data);
                 },function error(err){
                     cb(err);
                 });
             },
-            add(supplierName, supplierAddress, cb){
+            add(workId, resrouceId, value, cb){
                 var data = {
-                    name : supplierName,
-                    address : supplierAddress,
-                    user_id : 1
+                    work_id : workId,
+                    resource_id : resrouceId,
+                    value : value
                 }
                 API.callAPI("post",apiName.add,data).then(function success(res){
                     cb(res.data);
@@ -55,8 +52,8 @@ if("undefined" !== typeof app){
                     cb(err);
                 });
             },
-            delete(supplierId, cb){
-                API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[supplierId])).then(function success(res){
+            delete(workId, resrouceId , cb){
+                API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[workId, resourceId])).then(function success(res){
                     cb(true);
                 }, function error(err){
                     cb(false);

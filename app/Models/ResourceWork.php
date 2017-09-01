@@ -12,7 +12,7 @@ class ResourceWork extends Model
 	
 	public function work()
     {
-        return $this->belongsTo('App\Models\Work');
+        return $this->belongsTo('App\Models\Work',"work_id","id");
     }
 	
 	public function resource()

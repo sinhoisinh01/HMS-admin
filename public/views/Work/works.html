@@ -1,0 +1,93 @@
+<section class="content-header">
+	<h1>
+		Quản lý công tác
+		<!-- <small>Version 2.0</small> -->
+	</h1>
+	<ol class="breadcrumb">
+		<li class="active"><i class="fa fa-dashboard"></i> Công tác</li>
+	</ol>
+</section>
+<section class="content">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="box box-info">
+				<ul class="nav nav-pills" style="padding-bottom:5px">
+					<li class="active info"><a data-toggle="pill">Thêm</a></li>
+					<li><a data-toggle="pill">Nhập Excel</a></li>
+					<li><a data-toggle="pill">Xuất Excel</a></li>
+				</ul>
+				<form role="form">
+					<div class="box-body">
+						<div class="form-group">
+							<label>Tên</label>
+							<input type="text" class="form-control" ng-model="workName" placeholder="Nhập tên nhà cung cấp">
+						</div>
+						<div class="form-group">
+							<label>Mã</label>
+							<input type="text" class="form-control" ng-model="workCode" placeholder="Nhập tên nhà cung cấp">
+						</div>
+						<div class="form-group">
+							<label>Đơn vị</label>
+							<input type="text" class="form-control" ng-model="workUnit" placeholder="Nhập tên nhà cung cấp">
+						</div>
+					</div>
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary pull-right" ng-click="addWork()">Thêm</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Danh sách nhà cung cấp</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="form-group">
+						<label>Số lượng nhà cung cấp</label>
+						<select id="number-of-work" ng-value="limit">
+							<option value="10" selected>10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Mã</th>
+								<th>Tên</th>
+								<th>Đơn vị</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="work in works">
+								<td ng-bind="$index+1+index"></td>
+								<td ng-bind="work.code"></td>
+								<td ng-bind="work.name"></td>
+								<td ng-bind="work.unit"></td>
+								<td width="92px">
+									<a class="btn btn-danger pull-right" ng-click="deleteWork($index)"><i class="fa fa-trash"></i></a>
+									<a class="btn btn-default pull-right" href="#!/work/{{work.id}}"><i class="fa fa-pencil"></i></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer clearfix">
+					<ul class="pagination pagination-sm no-margin pull-right">
+						<!--                 <li><a href="#">&laquo;</a></li> -->
+						<li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
+						<!--                 <li><a href="#">&raquo;</a></li> -->
+					</ul>
+				</div>
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+
+</section>

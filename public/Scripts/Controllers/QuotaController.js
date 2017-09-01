@@ -1,5 +1,5 @@
 if("undefined" !== typeof app){
-	app.controller("SupplierController", function($scope, $uibModal, Supplier, $stateParams, $state) {
+	app.controller("QuotaController", function($scope, $uibModal, Supplier, $stateParams, $state) {
 
 		$scope.suppliers = [];
 		$scope.pages = [];

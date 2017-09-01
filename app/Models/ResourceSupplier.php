@@ -11,11 +11,11 @@ class ResourceSupplier extends Model
     protected $guarded = [];
     //protected $visible = ['resource_id', 'price'];
 
-    public resource(){
-    	return $this->belongsTo("App\Models\Resource");
+    public function resource(){
+    	return $this->belongsTo("App\Models\Resource","resource_id","id")->select(["id","code","name","unit"]);
     }
-    public supplier(){
-    	return $this->belongsTo("App\Models\Supplier");
+    public function supplier(){
+    	return $this->belongsTo("App\Models\Supplier","supplier_id","id");
     }
 
 }

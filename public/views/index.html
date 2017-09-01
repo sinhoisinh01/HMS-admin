@@ -4,9 +4,11 @@
 <aside class="main-sidebar">
 	<div ng-include="'views/Shared/sidebar.html'"></div>
 </aside>
-<div class="content-wrapper" ui-view="content">
+<div class="content-wrapper" >
+	<div ui-view="content" class="content-inner">
 
+	</div>
+	<footer class="main-footer">
+		<div ng-include="'views/Shared/footer.html'"></div>
+	</footer>
 </div>
-<footer class="main-footer">
-	<div ng-include="'views/Shared/footer.html'"></div>
-</footer>

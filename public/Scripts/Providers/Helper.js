@@ -14,9 +14,12 @@ if("undefined" !== typeof app){
     };
     this.getAPIEndPoint = function(path){
       var index = path.indexOf("/");
-      if(index < 0)
+      if(index !== 0)
         path = "/" + path;
       return CONFIG.apiEndPoint.replace(/^\/|\/$/g, '') + path;
+    }
+    this.toRealObject = function(object){
+      return JSON.parse(JSON.stringify(object));
     }
     this.$get = function Helper() {
       // let's assume that the UnicornLauncher constructor was also changed to

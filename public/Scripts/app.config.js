@@ -1,5 +1,5 @@
 if("undefined" !== typeof app){
 	app.constant("CONFIG",{
-        "apiEndPoint" : "http://localhost/HMS-admin/public/api"
+        "apiEndPoint" : "http://127.0.0.1:8000/api"
     });
 }

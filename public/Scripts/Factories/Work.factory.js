@@ -1,17 +1,16 @@
 if("undefined" !== typeof app){
-	app.factory('Supplier',function(API, Helper){
+	app.factory('Work',function(API, Helper){
         var apiName = {
-            "add" : "supplier",
-            "edit" : "supplier/$1",
-            "delete" : "supplier/$1",
-            "getOne" : "supplier/$1",
-            "getAll" : "supplier?index=$1&limit=$2",
-            "getPage" : "supplier/page/$1"
+            "add" : "work",
+            "edit" : "work/$1",
+            "delete" : "work/$1",
+            "getOne" : "work/$1",
+            "getAll" : "work?index=$1&limit=$2",
+            "getPage" : "work/page/$1"
         };
 		return {
-            getOne(supplierId, cb){
-                console.log(apiName);
-                API.callAPI("get",Helper.fixUrlAPI(apiName.getOne,[supplierId])).then(function success(res){
+            getOne(workId, cb){
+                API.callAPI("get",Helper.fixUrlAPI(apiName.getOne,[workId])).then(function success(res){
                     cb(res.data);
                 }, function error(err){
                     cb([]);
@@ -31,23 +30,24 @@ if("undefined" !== typeof app){
                     cb(0);
                 });
             },
-            edit(supplierId, supplierName, supplierAddress, cb){
+            edit(workId, workName, workUnit, cb){
                 var data = {
-                    name : supplierName,
-                    address : supplierAddress,
-                    user_id : 1
+                    name : workName,
+                    unit : workUnit
                 }
-                API.callAPI("put", Helper.fixUrlAPI(apiName.edit,[supplierId]), data).then(function success(res){
+                API.callAPI("put", Helper.fixUrlAPI(apiName.edit,[workId]), data).then(function success(res){
                     cb(res.data);
                 },function error(err){
                     cb(err);
                 });
             },
-            add(supplierName, supplierAddress, cb){
+            add(workName, workCode, workDocument, workUnit, cb){
                 var data = {
-                    name : supplierName,
-                    address : supplierAddress,
-                    user_id : 1
+                    name : workName,
+                    code : workCode,
+                    document : workDocument,
+                    unit : workUnit,
+                    contruction_id : 1
                 }
                 API.callAPI("post",apiName.add,data).then(function success(res){
                     cb(res.data);
@@ -55,8 +55,8 @@ if("undefined" !== typeof app){
                     cb(err);
                 });
             },
-            delete(supplierId, cb){
-                API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[supplierId])).then(function success(res){
+            delete(workId, cb){
+                API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[workId])).then(function success(res){
                     cb(true);
                 }, function error(err){
                     cb(false);

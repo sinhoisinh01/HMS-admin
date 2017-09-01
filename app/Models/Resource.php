@@ -19,4 +19,8 @@ class Resource extends Model
 	{
 		return $this->hasManyThrough('App\Models\ConstructionResources', 'App\Models\Construction');
 	}
+
+    public function suppliers(){
+        return $this->hasMany('App\Models\ResourceSupplier', 'resource_id', 'id');
+    }
 }

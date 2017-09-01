@@ -1,36 +1,64 @@
 if("undefined" !== typeof angular){
-	var app = angular.module('HMS-admin', ['ui.router', 'ngCookies'])
-		 			 .config(function ($stateProvider, $urlRouterProvider) {
-		 			 	$urlRouterProvider.when('', '/');
+	var app = angular.module('HMS-admin', ['ui.router', 'ui.bootstrap', 'ngCookies', 'debounce', 'infinite-scroll'])
+ .config(function ($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('', '/');
 				 		$urlRouterProvider.otherwise('/404');
 				 		$stateProvider
-				 			.state('main', {
-                url: '/',
-                views: {
-                  'main-content': {
-                    templateUrl: 'views/index.html',
-                    controller: 'IndexController'
-                  }
+            .state('main', {
+              url: '/',
+              views: {
+                'main-content': {
+                  templateUrl: 'views/index.html',
+                  controller: 'IndexController'
                 }
-            	})
-            	.state('404', {
-                url: '/404',
-                views: {
-                  'main-content': {
-                     templateUrl: 'views/404.html'
-                  }
+              }
+            })
+            .state('404', {
+              url: '/404',
+              views: {
+                'main-content': {
+                 templateUrl: 'views/404.html'
+               }
+             }
+           })
+            .state('supplierDetail', {
+              url: "supplier/:id?page&limit",
+              parent : "main",
+              views : {
+                'content' : {
+                  templateUrl : 'views/Resources/resources.html',
+                  controller : 'ResourceController',
                 }
-            	})
-            	.state('supplier', {
-            		url: "supplier",
-            		parent : 'main',
-            		views : {
-            			'content' : {
-            				templateUrl : 'views/Supplier/suppliers.html',
-            				controller : 'SupplierController'
-            			}
-            		}
-            	})
-					});	
-	 
+              }
+            })
+            .state('supplier', {
+              url: "supplier?page&limit",
+              parent : "main",
+              views : {
+               'content' : {
+                templateUrl : 'views/Supplier/suppliers.html',
+                controller : 'SupplierController',
+              }
+            }
+          }).state('work', {
+            url: "work?page&limit",
+            parent : "main",
+            views : {
+             'content' : {
+              templateUrl : 'views/Work/works.html',
+              controller : 'WorkController',
+            }
+          }
+        }).state('quota', {
+            url: "quota?page&limit",
+            parent : "main",
+            views : {
+             'content' : {
+              templateUrl : 'views/Quota/quota.html',
+              controller : 'QuotaController',
+            }
+          }
+        })
+        });
+
 }

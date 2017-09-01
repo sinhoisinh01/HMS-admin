@@ -1,5 +1,5 @@
 if("undefined" !== typeof app){
-	app.controller("SupplierController", function($scope, $uibModal, Supplier, $stateParams, $state) {
+	app.controller("WorkController", function($scope, $uibModal, Work, $stateParams, $state) {
 
 		$scope.suppliers = [];
 		$scope.pages = [];
@@ -9,9 +9,9 @@ if("undefined" !== typeof app){
 		$scope.isLoading = false;
 		function init(){
 			$scope.index = ($scope.currentPage - 1) * $scope.limit;
-			$.getScript("./js/init/initSupplier.js").then(function(){
-				$('select#number-of-supplier').on('change', function (evt) {
-					$scope.limit = $('select#number-of-supplier').val();
+			$.getScript("./js/init/initWork.js").then(function(){
+				$('select#number-of-work').on('change', function (evt) {
+					$scope.limit = $('select#number-of-work').val();
 					getPage();
 				});
 			});
@@ -25,7 +25,7 @@ if("undefined" !== typeof app){
 				// 	size : "md"
 				// });
 				$scope.pages = [];
-				Supplier.getPage($scope.limit,function(pages){
+				Work.getPage($scope.limit,function(pages){
 					$scope.isLoading = false;
 					// loadingModal.close();
 					var numberOfPage = pages.pages;
@@ -44,35 +44,35 @@ if("undefined" !== typeof app){
 		}
 		function getAll(cb = null){
 			if($scope.isLoading === false){
-				$scope.suppliers = [];
+				$scope.works = [];
 				$scope.isLoading = true;
-				Supplier.getAll($scope.index,$scope.limit,function(suppliers){
+				Work.getAll($scope.index,$scope.limit,function(works){
 					$scope.isLoading = false;
-					$scope.suppliers = suppliers;
+					$scope.works = works;
 					if(cb && typeof cb === "function"){
 						cb(true);
 					}
 				});
 			}
 		}
-		$scope.addSupplier = function(){
+		$scope.addWork = function(){
 			if($scope.isLoading === false){
 				$scope.isLoading = true;
-				Supplier.add($scope.supplierName, $scope.supplierAddress, function(supplier){
+				Work.add($scope.workName, $scope.workCode, $scope.workDocument, $scope.workUnit, function(work){
 					$scope.isLoading = false;
-					var length = $scope.suppliers.length;
+					var length = $scope.works.length;
 					if(length < $scope.limit)
 					{
-						$scope.suppliers.push(supplier);
+						$scope.works.push(work);
 					}
 				});	
 			}
 		}
-		$scope.deleteSupplier = function(index){
+		$scope.deleteWork = function(index){
 			if($scope.isLoading === false){
 				$scope.isLoading = true;
-				var id = $scope.suppliers[index].id;
-				Supplier.delete(id, function(isDeleted){
+				var id = $scope.works[index].id;
+				Work.delete(id, function(isDeleted){
 					$scope.isLoading = false;
 					getAll();	
 				});
