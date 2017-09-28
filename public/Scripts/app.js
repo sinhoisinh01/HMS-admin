@@ -27,7 +27,7 @@ if("undefined" !== typeof angular){
               views : {
                 'content' : {
                   templateUrl : 'views/Resources/resources.html',
-                  controller : 'ResourceController',
+                  controller : 'ResourceController'
                 }
               }
             })
@@ -37,7 +37,7 @@ if("undefined" !== typeof angular){
               views : {
                'content' : {
                 templateUrl : 'views/Supplier/suppliers.html',
-                controller : 'SupplierController',
+                controller : 'SupplierController'
               }
             }
           }).state('work', {
@@ -46,7 +46,7 @@ if("undefined" !== typeof angular){
             views : {
              'content' : {
               templateUrl : 'views/Work/works.html',
-              controller : 'WorkController',
+              controller : 'WorkController'
             }
           }
         }).state('quota', {
@@ -55,7 +55,16 @@ if("undefined" !== typeof angular){
             views : {
              'content' : {
               templateUrl : 'views/Quota/quota.html',
-              controller : 'QuotaController',
+              controller : 'QuotaController'
+            }
+          }
+        }).state('user', {
+          url : "user?page&limit",
+          parent : "main",
+          views : {
+            'content': {
+              templateUrl : "views/User/user.html",
+              controller : "UserController"
             }
           }
         })

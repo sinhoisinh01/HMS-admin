@@ -1,37 +1,27 @@
 if("undefined" !== typeof app){
 	app.controller("LeftSidebarController", function($scope) {
-	    $scope.menus =[
-	    	{ 
-	    		title : "Công tác", iconClass : "fa fa-building-o",  subMenus : [
-	    			{ title : "Xem công tác", iconClass : "", link : "#!/work"},
-	    			{ title : "Thêm công tác", iconClass : "", link : "#!/work/add"}
-	    		]
-	    	},
-	    	{ 
-	    		title : "Định mức", iconClass : "fa fa-calculator", subMenus : [
-	    			{ title : "Xem định mức", iconClass : "", link : "#!/quota"},
-	    			{ title : "Thêm định mức", iconClass : "", link : "#!/quota/add"}
-	    		]
-	    	},
-	    	{ 
-	    		title : "Hạng mục", iconClass : "fa fa-tasks", subMenus : [
-	    			{ title : "Xem hạng mục", iconClass : "", link : "#!/category"},
-	    			{ title : "Thêm hạng mục", iconClass : "", link : "#!/category/add"},
-	    		]
-	    	},
-	    	// { 
-	    	// 	title : "V", iconClass : "fa fa-archive", subMenus : [
-	    	// 		{ title : "Xem nhà cung cấp", iconClass : "",link : "#!/supplier" },
-	    	// 		{ title : "Thêm nhà cung cấp", iconClass : "",link : "#!/supplier/add" }
-	    	// 	]
-	    	// },
-	    	{ 
-	    		title : "Vật  tư", iconClass : "fa fa-cubes", subMenus : [
-	    			{ title : "Xem vật tư", iconClass : "", link : "#!/supplier" },
-	    			{ title : "Thêm vật tư", iconClass : "", link : "#!/supplier/add" },
-	    		]
-	    	},
-	    ]
+		$scope.menus =[
+		{ 
+			title : "Công tác", iconClass : "fa fa-building-o",  subMenus : [
+				{ title : "Xem công tác", iconClass : "", link : "#!/work"}
+			]
+		},
+		{ 
+			title : "Định mức", iconClass : "fa fa-calculator", subMenus : [
+				{ title : "Xem định mức", iconClass : "", link : "#!/quota"}
+			]
+		},
+		{ 
+			title : "Vật  tư", iconClass : "fa fa-cubes", subMenus : [
+				{ title : "Xem vật tư", iconClass : "", link : "#!/supplier" }
+			]
+		},
+		{ 
+			title : "Người dùng", iconClass : "fa fa-users", subMenus : [
+				{ title : "Xem người dùng", iconClass : "", link : "#!/category"}
+			]
+		},
+		]
 		$scope.onChose = function(event){
 			var ele = event.target;
 			var checkParent = $(ele).parents("ul.treeview-menu").length > 0 ? true : false;

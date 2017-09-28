@@ -1,5 +1,5 @@
 if("undefined" !== typeof app){
-	app.controller("SupplierController", function($scope, $uibModal, Supplier, $stateParams, $state) {
+	app.controller("SupplierController", function($scope, $uibModal, Supplier, Excel, $stateParams, $state) {
 
 		$scope.suppliers = [];
 		$scope.pages = [];
@@ -7,12 +7,16 @@ if("undefined" !== typeof app){
 		$scope.limit = $stateParams["limit"] || 10;
 		$scope.currentPage = $stateParams["page"] || 1;
 		$scope.isLoading = false;
+		$scope.exportFileType = "csv"
 		function init(){
 			$scope.index = ($scope.currentPage - 1) * $scope.limit;
 			$.getScript("./js/init/initSupplier.js").then(function(){
 				$('select#number-of-supplier').on('change', function (evt) {
 					$scope.limit = $('select#number-of-supplier').val();
 					getPage();
+				});
+				$('select#file-type').on('change', function (evt) {
+					$scope.exportFileType = $('select#file-type').val();
 				});
 			});
 		}
@@ -77,6 +81,28 @@ if("undefined" !== typeof app){
 					getAll();	
 				});
 			}
+		}
+		$scope.export = function(){
+			if($scope.isLoading === false){
+				$scope.isLoading = true;
+				Supplier.getAll(0,$scope.pages.length * $scope.limit,function(suppliers){
+					$scope.isLoading = false;
+					Excel.export(suppliers, $scope.exportFileType, function(excel){
+						var blob = new Blob([excel.data], {type: excel.type});
+						var objectUrl = URL.createObjectURL(blob);
+						var hiddenElement = document.createElement('a');
+						hiddenElement.href = objectUrl;
+						hiddenElement.target = '_blank';
+						hiddenElement.download = (+new Date()).toString() + excel.extension;
+						hiddenElement.click();
+					});
+				});
+			}
+		}
+		$scope.import = function(excel){
+			Excel.import($(excel)[0].files[0],function(result){
+				console.log(result);
+			});
 		}
 		init();
 		getPage(function next(isDone){

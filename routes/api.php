@@ -40,6 +40,9 @@ Route::get("/supplier/{supplierId}/resources/page/{numberOfRecord}",'ResourceCon
 Route::post("/resource", "ResourceController@add")->middleware("cORSFilter");
 Route::get("/resource/search", "ResourceController@getAll")->middleware("cORSFilter");
 
+Route::post("/excel/export", "ExcelController@export")->middleware("cORSFilter");
+Route::post("/excel/import", "ExcelController@import")->middleware("cORSFilter");
+
 Route::get('/test', function (Request $request) {
 	return 'Test CorsFilter';
 })->middleware('cORSFilter');

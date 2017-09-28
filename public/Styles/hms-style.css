@@ -63,6 +63,12 @@ html, body, .wrapper, .content-wrapper{
   background:#00C0EF;
   color:white;
 }
+li.info{
+  cursor : pointer;
+}
+li.info.active{
+  cursor : default;
+}
 /*Supplier*/
 .nav.nav-pills>li{
 	width:calc(33.3333333% - 1.4px);

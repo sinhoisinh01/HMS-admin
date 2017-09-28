@@ -17,17 +17,32 @@ class QuotaController extends Controller
         $index = $request->input('index'); 
         $limit = $request->input('limit');
         $quotas = ResourceWork::all()->groupBy('work_id');
-        $quotas = collect($quotas);
-        $result = [];
-        $length = sizeof($quotas);
-        for($i = 1; $i <= $length; $i++){
-        	array_push($result, $quotas[$i]);
-        }
-        return response()->json(array_slice($result, $index, $limit));
+        $quotas = $quotas->toArray();
+        $quotas = array_slice($quotas, $index, $limit);
+        $results = [];
+       	foreach($quotas as $key => $quota){
+       		$length = sizeof($quota);
+       		$work = Work::where("id", $quota[0]["work_id"])->first();
+       		$result = ["work_id" => $quota[0]["work_id"], "work_code" => $work["code"], "work_name" => $work["name"], "work_document" => $work["document"], "quotas" => [ "M" => [], "N" => [],"V" => [] ,]];
+       		for($i = 0; $i < $length; $i++){
+       			$resource = Resource::where("id", $quota[$i]["resource_id"])->first();
+       			if(strpos($resource["code"],"M") === 0){
+       				array_push($result["quotas"]["M"], ["resource_id" => $quota[$i]["resource_id"], "resource_value" => $quota[$i]["value"], "resource_name" => $resource["name"], "resource_code" => $resource["code"], "resource_unit" => $resource["unit"]]);
+       			}
+       			else if(strpos($resource["code"],"N") === 0){
+       				array_push($result["quotas"]["N"], ["resource_id" => $quota[$i]["resource_id"], "resource_value" => $quota[$i]["value"], "resource_name" => $resource["name"], "resource_code" => $resource["code"], "resource_unit" => $resource["unit"]]);
+       			}
+       			else {
+					array_push($result["quotas"]["V"], ["resource_id" => $quota[$i]["resource_id"], "resource_value" => $quota[$i]["value"], "resource_name" => $resource["name"], "resource_code" => $resource["code"], "resource_unit" => $resource["unit"]]);
+       			}
+       		}
+       		array_push($results, $result);
+       	}
+        return response()->json($results);
     }
 
     function getPage($numberOfRecord){
-    	$quotas = ResourceWork::get();
+    	$quotas = $quotas = ResourceWork::all()->groupBy('work_id');
         $numberOfRecord = intval($numberOfRecord);
     	$pages = intval(sizeof($quotas) / $numberOfRecord) + 1;
     	return response()->json(["pages" => $pages]);

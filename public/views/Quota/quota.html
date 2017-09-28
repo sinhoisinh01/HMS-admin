@@ -8,56 +8,108 @@
   </ol>
 </section>
 <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Danh sách định mức</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="form-group">
-                <label>Số lượng định mức</label>
-                <select id="number-of-quota" ng-value="limit">
-                  <option value="10" selected>10</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-              <table class="table table-bordered">
-              	<thead>
-	                <tr>
-	                  <th>#</th>
-	                  <th>Tên</th>
-	                  <th>Điạ chỉ</th>
-                    <th></th>
-	                </tr>
-              	</thead>
-              	<tbody>
-              		<tr ng-repeat="supplier in suppliers">
-	                  <td ng-bind="$index+1+index"></td>
-	                  <td ng-bind="supplier.name"></td>
-	                  <td ng-bind="supplier.address"></td>
-                    <td width="92px">
-                      <a class="btn btn-danger pull-right" ng-click="deleteSupplier($index)"><i class="fa fa-trash"></i></a>
-                      <a class="btn btn-default pull-right" href="#!/supplier/{{supplier.id}}"><i class="fa fa-pencil"></i></a>
-                    </td>
-	                </tr>
-              	</tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-<!--                 <li><a href="#">&laquo;</a></li> -->
-                <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
-<!--                 <li><a href="#">&raquo;</a></li> -->
-              </ul>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Danh sách định mức</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="form-group">
+            <label>Số lượng định mức</label>
+            <select id="number-of-quota" ng-value="limit">
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="M" ng-model="mView">
+                Máy thi công
+              </label>
+              <label>
+                <input type="checkbox" id="N" ng-model="nView">
+                Nhân công
+              </label>
+              <label>
+                <input type="checkbox" id="V" ng-model="vView">
+                Vật liệu
+              </label>
             </div>
           </div>
-          <!-- /.box -->
-        </div>
+          <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Mã</th>
+               <th>Tên</th>
+               <th>Văn bản</th>
+               <th>Đơn vị</th>
+               <th>Mức hao phí</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody ng-repeat="work in quotas">
+            <tr>
+             <td ng-bind="$index+1+index" rowspan="{{(work.quotas.M.length ? (work.quotas.M.length + 2) : 0) + (work.quotas.N.length ? (work.quotas.N.length + 2) : 0) + (work.quotas.V.length ? (work.quotas.V.length + 2) : 0)}}"></td>
+             <td ng-bind="work.work_code"></td>
+             <td ng-bind="work.work_name"></td>
+             <td ng-bind="work.work_document"></td>
+             <td></td>
+             <td></td>
+             <td width="92px" rowspan="{{(work.quotas.M.length ? (work.quotas.M.length + 2) : 0) + (work.quotas.N.length ? (work.quotas.N.length + 2) : 0) + (work.quotas.V.length ? (work.quotas.V.length + 2) : 0)}}">
+              <a class="btn btn-danger pull-right" ng-click="deleteSupplier($index)"><i class="fa fa-trash"></i></a>
+              <a class="btn btn-default pull-right" href="#!/supplier/{{supplier.id}}"><i class="fa fa-pencil"></i></a>
+            </td>
+          </tr>
+          <tr ng-if="work.quotas.M.length > 0 && mView">
+            <th></th>
+            <th colspan="4">Máy thi công</th>
+          </tr>
+          <tr ng-repeat="resource in work.quotas.M">
+            <td ng-if="mView"></td>
+            <td ng-if="mView" colspan="2"><i ng-bind="resource.resource_name"></i></td>
+            <td ng-if="mView" ng-bind="resource.resource_unit"></td>
+            <td ng-if="mView" ng-bind="resource.resource_value"></td>
+          </tr>
+          <tr ng-if="work.quotas.N.length > 0 && nView">
+            <th></th>
+            <th colspan="4">Nhân công</th>
+          </tr>
+          <tr ng-repeat="resource in work.quotas.N">
+            <td ng-if="nView"></td>
+            <td ng-if="nView" colspan="2"><i ng-bind="resource.resource_name"></i></td>
+            <td ng-if="nView" ng-bind="resource.resource_unit"></td>
+            <td ng-if="nView" ng-bind="resource.resource_value"></td>
+          </tr>
+          <tr ng-if="work.quotas.V.length > 0 && vView">
+            <th></th>
+            <th colspan="4">Vật liệu</th>
+          </tr>
+          <tr ng-repeat="resource in work.quotas.V">
+            <td ng-if="vView"></td>
+            <td ng-if="vView" colspan="2"><i ng-bind="resource.resource_name"></i></td>
+            <td ng-if="vView" ng-bind="resource.resource_unit"></td>
+            <td ng-if="vView" ng-bind="resource.resource_value"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <!--                 <li><a href="#">&laquo;</a></li> -->
+        <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
+        <!--                 <li><a href="#">&raquo;</a></li> -->
+      </ul>
+    </div>
+  </div>
+  <!-- /.box -->
+</div>
+</div>
 
 </section>

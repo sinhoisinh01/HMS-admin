@@ -8,80 +8,103 @@
   </ol>
 </section>
 <section class="content">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="box box-info">
-            <ul class="nav nav-pills" style="padding-bottom:5px">
-              <li class="active info"><a data-toggle="pill">Thêm</a></li>
-              <li><a data-toggle="pill">Nhập Excel</a></li>
-              <li><a data-toggle="pill">Xuất Excel</a></li>
-            </ul>
-            <form role="form">
-            <div class="box-body">
-              <div class="form-group">
-                <label>Tên</label>
-                <input type="text" class="form-control" ng-model="supplierName" placeholder="Nhập tên nhà cung cấp">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="box box-info">
+        <ul class="nav nav-pills" style="padding-bottom:5px">
+          <li class="active info"><a data-toggle="pill" href="#normal">Thêm</a></li>
+          <li class="info"><a data-toggle="pill" href="#i-excel" >Nhập Excel</a></li>
+          <li class="info"><a data-toggle="pill" href="#e-excel" >Xuất Excel</a></li>
+        </ul>
+        <form role="form">
+          <div class="box-body">
+            <div class="tab-content">
+              <div id="normal" class="tab-pane fade in active">
+                <div class="form-group">
+                  <label>Tên</label>
+                  <input type="text" class="form-control" ng-model="supplierName" placeholder="Nhập tên nhà cung cấp">
+                </div>
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <textarea class="form-control" rows="5" ng-model="supplierAddress" placeholder="Nhập địa chỉ nhà cung cấp" style="resize:none"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary pull-right" ng-click="addSupplier()">Thêm</button>
+                </div>
               </div>
-              <div class="form-group">
-                <label>Địa chỉ</label>
-                <textarea class="form-control" rows="5" ng-model="supplierAddress" placeholder="Nhập địa chỉ nhà cung cấp" style="resize:none"></textarea>
+              <div id="i-excel" class="tab-pane fade">
+                <div class="form-group">
+                  <label>Tải tập tin excel</label>
+                  <input type="file" id="import-excel" class="form-control" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                  <button class="btn btn-primary" style="margin-top:5px" ng-click="import('#import-excel')">Nhập từ excel</button>
+                </div> 
               </div>
-            </div>
-            <div class="box-footer">
-              <button type="submit" class="btn btn-primary pull-right" ng-click="addSupplier()">Thêm</button>
-            </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Danh sách nhà cung cấp</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="form-group">
-                <label>Số lượng nhà cung cấp</label>
-                <select id="number-of-supplier" ng-value="limit">
-                  <option value="10" selected>10</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                </select>
+              <div id="e-excel" class="tab-pane fade">
+                <div class="form-group">
+                  <label>Loại tập tin</label>
+                  <select id="file-type" ng-value="exportFileType">
+                    <option value="csv" selected>*.csv</option>
+                    <option value="xls">*.xls</option>
+                    <option value="xlsx">*.xlsx</option>
+                  </select>
+                  <button class="btn btn-primary" ng-click="export()">Xuất ra excel</button>
+                </div>
+                  
               </div>
-              <table class="table table-bordered">
-              	<thead>
-	                <tr>
-	                  <th>#</th>
-	                  <th>Tên</th>
-	                  <th>Điạ chỉ</th>
-                    <th></th>
-	                </tr>
-              	</thead>
-              	<tbody>
-              		<tr ng-repeat="supplier in suppliers">
-	                  <td ng-bind="$index+1+index"></td>
-	                  <td ng-bind="supplier.name"></td>
-	                  <td ng-bind="supplier.address"></td>
-                    <td width="92px">
-                      <a class="btn btn-danger pull-right" ng-click="deleteSupplier($index)"><i class="fa fa-trash"></i></a>
-                      <a class="btn btn-default pull-right" href="#!/supplier/{{supplier.id}}"><i class="fa fa-pencil"></i></a>
-                    </td>
-	                </tr>
-              	</tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-<!--                 <li><a href="#">&laquo;</a></li> -->
-                <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
-<!--                 <li><a href="#">&raquo;</a></li> -->
-              </ul>
             </div>
           </div>
-          <!-- /.box -->
-        </div>
+        </form>
+      </div>
     </div>
+    <div class="col-md-8">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Danh sách nhà cung cấp</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="form-group">
+            <label>Số lượng nhà cung cấp</label>
+            <select id="number-of-supplier" ng-value="limit">
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Tên</th>
+               <th>Điạ chỉ</th>
+               <th></th>
+             </tr>
+           </thead>
+           <tbody>
+            <tr ng-repeat="supplier in suppliers">
+             <td ng-bind="$index+1+index"></td>
+             <td ng-bind="supplier.name"></td>
+             <td ng-bind="supplier.address"></td>
+             <td width="92px">
+              <a class="btn btn-danger pull-right" ng-click="deleteSupplier($index)"><i class="fa fa-trash"></i></a>
+              <a class="btn btn-default pull-right" href="#!/supplier/{{supplier.id}}"><i class="fa fa-pencil"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+      <ul class="pagination pagination-sm no-margin pull-right">
+        <!--                 <li><a href="#">&laquo;</a></li> -->
+        <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
+        <!--                 <li><a href="#">&raquo;</a></li> -->
+      </ul>
+    </div>
+  </div>
+  <!-- /.box -->
+</div>
+</div>
 
 </section>
