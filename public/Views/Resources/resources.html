@@ -29,39 +29,63 @@
         </form>
       </div>
       <div class="box box-info">
-        <ul class="nav nav-pills" style="padding-bottom:5px">
-          <li class="active info"><a data-toggle="pill">Thêm</a></li>
-          <li><a data-toggle="pill">Nhập Excel</a></li>
-          <li><a data-toggle="pill">Xuất Excel</a></li>
+        <ul class="insert-options nav nav-pills" style="padding-bottom:5px">
+          <li class="active info"><a data-toggle="pill" href="#normal">Thêm</a></li>
+          <li class="info"><a data-toggle="pill" href="#i-excel" >Nhập Excel</a></li>
+          <li class="info"><a data-toggle="pill" href="#e-excel" >Xuất Excel</a></li>
         </ul>
         <form role="form">
           <div class="box-body">
-            <div class="form-group">
-              <label>Tên vật tự</label>
-              <input type="text" class="form-control" ng-model="resourceName" ng-model-options="{ debounce: 1000 }" placeholder="Nhập tên vật tư">
-              <div class="search-result">
-                <ul class="list-group" ng-if="searchResources && searchResources.length > 0">
-                  <li class="list-group-item" ng-repeat="searchResource in searchResources track by $index"><a ng-click="chooseResource($index)" ng-bind="searchResource.name"></a></li>
-                  <li class="list-group-item" ng-if="resourceName && !isMatched && endSearch"><a ng-click="addNewResource()">Thêm mới vật tư "<i ng-bind="resourceName"></i>"</a></li>
-                  <li class="list-group-item loading" ng-if="isLoading"><img src="./images/loading.gif" height="30" width="30"/></li>
-                </ul>
+            <div class="tab-content">
+              <div id="normal" class="tab-pane fade in active">
+                <div class="form-group">
+                  <label>Tên vật tự</label>
+                  <input type="text" class="form-control" ng-model="resourceName" ng-model-options="{ debounce: 1000 }" placeholder="Nhập tên vật tư">
+                  <div class="search-result">
+                    <ul class="list-group" ng-if="searchResources && searchResources.length > 0">
+                      <li class="list-group-item" ng-repeat="searchResource in searchResources track by $index"><a ng-click="chooseResource($index)" ng-bind="searchResource.name"></a></li>
+                      <li class="list-group-item" ng-if="resourceName && !isMatched && endSearch"><a ng-click="addNewResource()">Thêm mới vật tư "<i ng-bind="resourceName"></i>"</a></li>
+                      <li class="list-group-item loading" ng-if="isLoading"><img src="./images/loading.gif" height="30" width="30"/></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="form-group" ng-if="isNew">
+                  <label>Mã vật tư</label>
+                  <input type="text" class="form-control" ng-model="$parent.resourceCode" placeholder="Nhập mã vật tư">
+                </div>
+                <div class="form-group">
+                  <label>Giá vật tư</label>
+                  <input type="text" class="form-control" ng-model="resourcePrice" placeholder="Nhập giá vật tư">
+                </div>
+                <div class="form-group" ng-if="isNew">
+                  <label>Đơn vị</label>
+                  <input type="text" class="form-control" ng-model="$parent.resourceUnit"  placeholder="Nhập đơn vị">
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary pull-right" ng-click="addResource()">Thêm</button>
+                </div>
+              </div>
+              <div id="i-excel" class="tab-pane fade">
+                <div class="form-group">
+                  <label>Tải tập tin excel</label>
+                  <input type="file" id="import-excel" class="form-control" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                  <button class="btn btn-primary" style="margin-top:5px" ng-click="import('#import-excel')">Nhập từ excel</button>
+                </div> 
+              </div>
+              <div id="e-excel" class="tab-pane fade">
+                <div class="form-group">
+                  <label>Loại tập tin</label>
+                  <select id="file-type" class="form-control">
+                    <option value="csv">*.csv</option>
+                    <option value="xls">*.xls</option>
+                    <option value="xlsx">*.xlsx</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary" ng-click="export()">Xuất ra excel</button>
+                </div>
               </div>
             </div>
-            <div class="form-group" ng-if="isNew">
-              <label>Mã vật tư</label>
-              <input type="text" class="form-control" ng-model="$parent.resourceCode" placeholder="Nhập mã vật tư">
-            </div>
-            <div class="form-group">
-              <label>Giá vật tư</label>
-              <input type="text" class="form-control" ng-model="resourcePrice" placeholder="Nhập giá vật tư">
-            </div>
-            <div class="form-group" ng-if="isNew">
-              <label>Đơn vị</label>
-              <input type="text" class="form-control" ng-model="$parent.resourceUnit"  placeholder="Nhập đơn vị">
-            </div>
-          </div>
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary pull-right" ng-click="addResource()">Thêm</button>
           </div>
         </form>
       </div>
@@ -95,7 +119,7 @@
              </tr>
            </thead>
            <tbody ng-if="resources.length > 0">
-            <tr ng-repeat="resource in resources">
+            <tr ng-repeat="resource in resources track by $index">
               <td ng-bind="$index+1+index"></td>
               <td ng-bind="resource.code"></td>
               <td ng-bind="resource.name"></td>
@@ -115,13 +139,7 @@
       </table>
     </div>
     <!-- /.box-body -->
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-        <!--                 <li><a href="#">&laquo;</a></li> -->
-        <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
-        <!--                 <li><a href="#">&raquo;</a></li> -->
-      </ul>
-    </div>
+    <ng-include src="'Views/Shared/pagination.html'" scope="pages,currentPage,limit"></ng-include>
   </div>
   <!-- /.box -->
 </div>

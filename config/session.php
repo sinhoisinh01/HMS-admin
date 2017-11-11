@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => isset($_ENV["SESSION_DRIVER"]) ? $_ENV["SESSION_DRIVER"] : "file",
 
     /*
     |--------------------------------------------------------------------------
@@ -148,7 +148,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => isset($_ENV["SESSION_DOMAIN"]) ? $_ENV["SESSION_DOMAIN"] : null,
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +161,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE', false),
+    'secure' => isset($_ENV["SESSION_SECURE_COOKIE"]) ? $_ENV["SESSION_SECURE_COOKIE"] : false,
 
     /*
     |--------------------------------------------------------------------------

@@ -12,12 +12,20 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::post("/supplier",'SupplierController@add')->middleware('cORSFilter');
 Route::get("/supplier",'SupplierController@getAll')->middleware('cORSFilter');
 Route::get("/supplier/{id}",'SupplierController@getOne')->middleware('cORSFilter');
 Route::delete("/supplier/{id}",'SupplierController@remove')->middleware('cORSFilter');
 Route::put("/supplier/{id}",'SupplierController@update')->middleware('cORSFilter');
-Route::get("/supplier/page/{numberOfRecord}",'SupplierController@getPage')->middleware('cORSFilter');
+Route::get("/vsupplier/page/{numberOfRecord}",'SupplierController@getPage')->middleware('cORSFilter');
+
+Route::post("/user",'UserController@add')->middleware('cORSFilter');
+Route::get("/user",'UserController@getAll')->middleware('cORSFilter');
+Route::get("/user/{id}",'UserController@getOne')->middleware('cORSFilter');
+Route::delete("/user/{id}",'UserController@remove')->middleware('cORSFilter');
+Route::put("/user/{id}",'UserController@update')->middleware('cORSFilter');
+Route::get("/user/page/{numberOfRecord}",'UserController@getPage')->middleware('cORSFilter');
 
 Route::post("/work",'WorkController@add')->middleware('cORSFilter');
 Route::get("/work",'WorkController@getAll')->middleware('cORSFilter');
@@ -36,17 +44,20 @@ Route::get("/quota/page/{numberOfRecord}",'QuotaController@getPage')->middleware
 Route::get("/supplier/{supplierId}/resources",'ResourceController@getAllBySupplier')->middleware('cORSFilter');
 Route::post("/supplier/{supplierId}/resources",'ResourceController@addToSupplier')->middleware('cORSFilter');
 Route::get("/supplier/{supplierId}/resources/page/{numberOfRecord}",'ResourceController@getPage')->middleware('cORSFilter');
+Route::delete("/supplier/{supplierId}/resource/{resourceId}",'ResourceController@remove')->middleware('cORSFilter');
 
 Route::post("/resource", "ResourceController@add")->middleware("cORSFilter");
 Route::get("/resource/search", "ResourceController@getAll")->middleware("cORSFilter");
+Route::get("/resource/{id}", "ResourceController@getOne")->middleware("cORSFilter");
 
 Route::post("/excel/export", "ExcelController@export")->middleware("cORSFilter");
 Route::post("/excel/import", "ExcelController@import")->middleware("cORSFilter");
+Route::post("/excel/prepare", "ExcelController@prepare")->middleware("cORSFilter");
 
 Route::get('/test', function (Request $request) {
 	return 'Test CorsFilter';
 })->middleware('cORSFilter');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

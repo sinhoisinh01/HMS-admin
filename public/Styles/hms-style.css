@@ -70,11 +70,51 @@ li.info.active{
   cursor : default;
 }
 /*Supplier*/
-.nav.nav-pills>li{
+.insert-options.nav.nav-pills>li{
 	width:calc(33.3333333% - 1.4px);
 }
 .nav.nav-pills>li>a{
 	text-align:center;
+}
+table.excel{
+  max-height:100%;
+}
+/*Pagination*/
+ul.hidden-page{
+  display:none;
+  list-style-type: none;
+  border:1px solid rgba(0,0,0,0.2);
+  width:60px;
+  position:absolute;
+  background:white;
+  padding:0;
+  bottom:30px;
+}
+ul.hidden-page li a {
+  display:block;
+  width:100%;
+  text-align: center;
+  font-size:12px;
+  padding:5px 0;
+  color:#666;
+}
+ul.hidden-page li a:hover{
+  background:#eee; 
+}
+/*Excel*/
+table.excel>thead>tr>th{
+  background:#BFBFBF;
+}
+table.excel>thead>tr>th:first-child{
+  width:45px;
+}
+table.excel>tbody>tr>td:first-child{
+  background:#BFBFBF;
+}
+/*Modal*/
+.excel-modal .modal-dialog{
+  width:100%;
+  margin:0;
 }
 /*Loading*/
 .gly-spin {
@@ -161,4 +201,15 @@ li.info.active{
 .loading{
   text-align: center;
   padding:5px 0 !important;
+}
+.custom-box{
+  height:200px;
+}
+.custom-box .inner h4{
+  font-size:30px;
+  text-align: center;
+}
+.custom-box .icon {
+  position:relative;
+  text-align: center;
 }

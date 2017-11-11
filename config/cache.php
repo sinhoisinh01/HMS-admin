@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_DRIVER', 'file'),
+    'default' => isset($_ENV["CACHE_DRIVER"]) ? $_ENV["CACHE_DRIVER"] : "file",
 
     /*
     |--------------------------------------------------------------------------
@@ -51,18 +51,18 @@ return [
 
         'memcached' => [
             'driver' => 'memcached',
-            'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+            'persistent_id' => isset($_ENV["MEMCACHED_PERSISTENT_ID"]) ? $_ENV["MEMCACHED_PERSISTENT_ID"] : "",
             'sasl' => [
-                env('MEMCACHED_USERNAME'),
-                env('MEMCACHED_PASSWORD'),
+                isset($_ENV["MEMCACHED_USERNAME"]) ? $_ENV["MEMCACHED_USERNAME"] : "",
+                isset($_ENV["MEMCACHED_PASSWORD"]) ? $_ENV["MEMCACHED_PASSWORD"] : "",
             ],
             'options' => [
                 // Memcached::OPT_CONNECT_TIMEOUT  => 2000,
             ],
             'servers' => [
                 [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
-                    'port' => env('MEMCACHED_PORT', 11211),
+                    'host' => isset($_ENV["MEMCACHED_HOST"]) ? $_ENV["MEMCACHED_HOST"] : "127.0.0.1",
+                    'port' => isset($_ENV["MEMCACHED_PORT"]) ? $_ENV["MEMCACHED_PORT"] : 11211,
                     'weight' => 100,
                 ],
             ],

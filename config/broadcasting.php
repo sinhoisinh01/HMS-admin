@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => isset($_ENV["BROADCAST_DRIVER"]) ? $_ENV["BROADCAST_DRIVER"] : "null",
 
     /*
     |--------------------------------------------------------------------------
@@ -32,9 +32,9 @@ return [
 
         'pusher' => [
             'driver' => 'pusher',
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'app_id' => env('PUSHER_APP_ID'),
+            'key' => isset($_ENV["PUSHER_APP_KEY"]) ? $_ENV["PUSHER_APP_KEY"] : "",
+            'secret' => isset($_ENV["PUSHER_APP_SECRET"]) ? $_ENV["PUSHER_APP_SECRET"] : "",
+            'app_id' => isset($_ENV["PUSHER_APP_ID"]) ? $_ENV["PUSHER_APP_ID"] : "",
             'options' => [
                 //
             ],

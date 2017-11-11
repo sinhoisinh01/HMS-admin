@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="box box-info">
-        <ul class="nav nav-pills" style="padding-bottom:5px">
+        <ul class="insert-options nav nav-pills" style="padding-bottom:5px">
           <li class="active info"><a data-toggle="pill" href="#normal">Thêm</a></li>
           <li class="info"><a data-toggle="pill" href="#i-excel" >Nhập Excel</a></li>
           <li class="info"><a data-toggle="pill" href="#e-excel" >Xuất Excel</a></li>
@@ -42,14 +42,15 @@
               <div id="e-excel" class="tab-pane fade">
                 <div class="form-group">
                   <label>Loại tập tin</label>
-                  <select id="file-type" ng-value="exportFileType">
-                    <option value="csv" selected>*.csv</option>
+                  <select id="file-type" class="form-control">
+                    <option value="csv">*.csv</option>
                     <option value="xls">*.xls</option>
                     <option value="xlsx">*.xlsx</option>
                   </select>
+                </div>
+                <div class="form-group">
                   <button class="btn btn-primary" ng-click="export()">Xuất ra excel</button>
                 </div>
-                  
               </div>
             </div>
           </div>
@@ -95,13 +96,7 @@
       </table>
     </div>
     <!-- /.box-body -->
-    <div class="box-footer clearfix">
-      <ul class="pagination pagination-sm no-margin pull-right">
-        <!--                 <li><a href="#">&laquo;</a></li> -->
-        <li><a ui-sref="{page}" ng-repeat="page in pages"><span ng-bind="page"></span></a></li>
-        <!--                 <li><a href="#">&raquo;</a></li> -->
-      </ul>
-    </div>
+    <ng-include src="'Views/Shared/pagination.html'" scope="pages,currentPage,limit"></ng-include>
   </div>
   <!-- /.box -->
 </div>

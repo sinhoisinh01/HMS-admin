@@ -15,24 +15,24 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => isset($_ENV["MAILGUN_DOMAIN"]) ? $_ENV["MAILGUN_DOMAIN"] : "",
+        'secret' => isset($_ENV["MAILGUN_SECRET"]) ? $_ENV["MAILGUN_SECRET"] : "",
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
+        'key' => isset($_ENV["SES_KEY"]) ? $_ENV["SES_KEY"] : "",
+        'secret' => isset($_ENV["SES_SECRET"]) ? $_ENV["SES_SECRET"] : "",
         'region' => 'us-east-1',
     ],
 
     'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
+        'secret' => isset($_ENV["SPARKPOST_SECRET"]) ? $_ENV["SPARKPOST_SECRET"] : "",
     ],
 
     'stripe' => [
         'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
+        'key' => isset($_ENV["STRIPE_KEY"]) ? $_ENV["STRIPE_KEY"] : "",
+        'secret' => isset($_ENV["STRIPE_SECRET"]) ? $_ENV["STRIPE_SECRET"] : "",
     ],
 
 ];

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DRIVER', 'local'),
+    'default' => isset($_ENV["FILESYSTEM_DRIVER"]) ? $_ENV["FILESYSTEM_DRIVER"] : "local",
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    'cloud' => isset($_ENV["FILESYSTEM_CLOUD"]) ? $_ENV["FILESYSTEM_CLOUD"] : "s3",
 
     /*
     |--------------------------------------------------------------------------
@@ -51,16 +51,16 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => (isset($_ENV["APP_URL"]) ? $_ENV["APP_URL"] : "").'/storage',
             'visibility' => 'public',
         ],
 
         's3' => [
             'driver' => 's3',
-            'key' => env('AWS_KEY'),
-            'secret' => env('AWS_SECRET'),
-            'region' => env('AWS_REGION'),
-            'bucket' => env('AWS_BUCKET'),
+            'key' => isset($_ENV["AWS_KEY"]) ? $_ENV["AWS_KEY"] : "",
+            'secret' => isset($_ENV["AWS_SECRET"]) ? $_ENV["AWS_SECRET"] : "",
+            'region' => isset($_ENV["AWS_SECRET"]) ? $_ENV["AWS_SECRET"] : "",
+            'bucket' => isset($_ENV["AWS_BUCKET"]) ? $_ENV["AWS_BUCKET"] : "",
         ],
 
     ],

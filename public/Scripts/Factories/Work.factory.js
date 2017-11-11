@@ -47,7 +47,7 @@ if("undefined" !== typeof app){
                     code : workCode,
                     document : workDocument,
                     unit : workUnit,
-                    contruction_id : 1
+                    construction_id : 1
                 }
                 API.callAPI("post",apiName.add,data).then(function success(res){
                     cb(res.data);

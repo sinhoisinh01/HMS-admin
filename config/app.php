@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => isset($_ENV["APP_NAME"]) ? $_ENV["APP_NAME"] : "Laravel",
 
     /*
     |--------------------------------------------------------------------------
@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => isset($_ENV["APP_ENV"]) ? $_ENV["APP_ENV"] : "production",
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => isset($_ENV["APP_DEBUG"]) ? $_ENV["APP_DEBUG"] : true,
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' =>isset($_ENV["APP_URL"]) ? $_ENV["APP_URL"] : "http://localhost",
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => isset($_ENV["APP_KEY"]) ? $_ENV["APP_KEY"] : "",
 
     'cipher' => 'AES-256-CBC',
 
@@ -120,9 +120,9 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => isset($_ENV["APP_LOG"]) ? $_ENV["APP_LOG"] : "single",
 
-    'log_level' => env('APP_LOG_LEVEL', 'error'),
+    'log_level' => isset($_ENV["APP_LOG_LEVEL"]) ? $_ENV["APP_LOG_LEVEL"] : "error",
 
     /*
     |--------------------------------------------------------------------------

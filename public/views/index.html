@@ -1,14 +1,75 @@
 <header class="main-header">
-	<div ng-include="'views/Shared/header.html'"></div>
+	<div ng-include="'Views/Shared/header.html'"></div>
 </header>
 <aside class="main-sidebar">
-	<div ng-include="'views/Shared/sidebar.html'"></div>
+	<div ng-include="'Views/Shared/sidebar.html'"></div>
 </aside>
 <div class="content-wrapper" >
 	<div ui-view="content" class="content-inner">
-
+		<div class="container-fluid" style="padding:65px">
+			<div class="row">
+				<div class="col-lg-3 col-xs-6">
+					<a href="/index.html#!/work">
+						<!-- small box -->
+						<div class="small-box custom-box bg-aqua">
+							<div class="inner">
+								<h4>Quản lý công tác</h4>
+							</div>
+							<div class="icon">
+								<i class="fa fa-building-o"></i>
+							</div>
+						</div>
+					</a>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<a href="/index.html#!/quota">
+						<!-- small box -->
+						<div class="small-box custom-box bg-green">
+							<div class="inner">
+								<h4>Quản lý định mức</h4>
+							</div>
+							<div class="icon">
+								<i class="fa fa-calculator"></i>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<a href="/index.html#!/supplier">
+						<!-- small box -->
+						<div class="small-box custom-box bg-yellow">
+							<div class="inner">
+								<h4>Quản lý vật tư</h4>
+							</div>
+							<div class="icon">
+								<i class="fa fa-cubes"></i>
+							</div>
+						</div>
+					</a>
+					
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<a href="/index.html#!/user">
+						<!-- small box -->
+						<div class="small-box custom-box bg-red">
+							<div class="inner">
+								<h4>Quản lý người dùng</h4>
+							</div>
+							<div class="icon">
+								<i class="fa fa-users"></i>
+							</div>
+						</div>
+					</a>			
+				</div>
+				<!-- ./col -->
+			</div>
+		</div>
 	</div>
 	<footer class="main-footer">
-		<div ng-include="'views/Shared/footer.html'"></div>
+		<div ng-include="'Views/Shared/footer.html'"></div>
 	</footer>
 </div>

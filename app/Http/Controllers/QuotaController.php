@@ -55,7 +55,7 @@ class QuotaController extends Controller
         return response()->json($result);
 	}
 
-    function update($workId, $resourceId, Request $request)
+  function update($workId, $resourceId, Request $request)
 	{
         $quota = $request->input();
         $edited = ResourceWork::where("work_id",$workId)->where("resource_id",$resourceId)->update($quota);
@@ -67,7 +67,7 @@ class QuotaController extends Controller
         }       
 	}
 
-    function remove($workId,$resourceId)
+  function remove($workId,$resourceId)
 	{
 		Supplier::destroy($id);
 	}

@@ -1,0 +1,15 @@
+<div class="box-footer clearfix" data-ng-controller="PaginationController">
+	<ul class="pagination pagination-sm no-margin pull-right">
+		<li><a href="" ng-if="currentPage > 1" ng-click="back()">&laquo;</a></li>
+		<li><a ng-if="currentPage === 1">&laquo;</a></li>
+		<li ng-repeat="page in pages">
+			<a ui-sref="{page}" ng-if="($index >= currentPage && $index <= middle - 7) || ($index >= middle + 5 && $index <= numberOfPages + currentPage - 1)"><span ng-bind="page"></span></a>
+			<a class="show-hidden-page" ng-if="$index === middle && isHavingMiddle"><span>...</span></a>
+		</li>
+		<li><a href="" ng-if="currentPage < pages.length" ng-click="next()">&raquo;</a></li>
+		<li><a ng-if="currentPage === pages.length" >&raquo;</a></li>
+	</ul>
+	<ul class="hidden-page">
+		<li ng-repeat="hiddenPage in hiddenPages"><a ui-sref="{page : hiddenPage}"><span ng-bind="hiddenPage"></span></a></li>
+	</ul>
+</div>

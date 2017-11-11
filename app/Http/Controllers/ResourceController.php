@@ -68,6 +68,20 @@ class ResourceController extends Controller
         $returnArrayResult = array_slice($returnArrayResult,$index,$limit);
         return response()->json($returnArrayResult); 
     }
+    function getOne($id){
+        $resource = Resource::where('user_id', 1)->where('id',$id)->first();
+        if($resource == null){
+            $resource = Resource::where('user_id', 1)->where('code',$id)->first();
+        }
+        return response()->json($resource);
+    }
+    function getOneBySupplier($supplierId, $id){
+        $supplier = Supplier::where('user_id', 1)->find($supplierId);
+        $resourceSupplier = $supplier->resources()->where("resource_id",$id)->first()->toArray();
+        $resource = Resource::where('user_id', 1)->find($id)->toArray();
+        $resource = array_merge($resource, $resourceSupplier);
+        return response()->json($resource);
+    }
     function getPage($supplierId, $numberOfRecord){
     	$supplier = Supplier::where('user_id',1)->find($supplierId);
     	if($supplier != null){
@@ -91,8 +105,8 @@ class ResourceController extends Controller
     function addToSupplier(Request $request)
     {
         $resourceSupplier = $request->input();
-        $result = ResourceSupplier::create($resourceSupplier);
-        return response()->json($result);
+        $newResource = ResourceSupplier::create($resourceSupplier);
+        return $this->getOneBySupplier($newResource["supplier_id"], $newResource["resource_id"]);
     }
 
     function update($id, Request $request)
@@ -100,8 +114,8 @@ class ResourceController extends Controller
         Supplier::find($id)->update($request->input('supplier'));
 	}
 
-    function remove($id)
+    function remove($supplierId, $resourceId)
 	{
-		Supplier::destroy($id);
+		ResourceSupplier::where('supplier_id', $supplierId)->where('resource_id', $resourceId)->delete();
 	}
 }

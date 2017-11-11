@@ -1,0 +1,67 @@
+<section class="content-header">
+  <h1>
+    Quản lý người dùng
+    <!-- <small>Version 2.0</small> -->
+  </h1>
+  <ol class="breadcrumb">
+    <li class="active"><i class="fa fa-dashboard"></i> Người dùng</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Danh sách người dùng</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="form-group">
+            <label>Số lượng người dùng</label>
+            <select id="number-of-supplier" ng-value="limit">
+              <option value="10" selected>10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+          <table class="table table-bordered">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Ảnh đại diện</th>
+               <th>Google_ID</th>
+               <th>Token</th>
+               <th>Refresh token</th>
+               <th>Tên</th>
+               <th>Email</th>
+               <!-- <th></th> -->
+             </tr>
+           </thead>
+           <tbody>
+            <tr ng-repeat="user in users">
+             <td ng-bind="$index+1+index"></td>
+             <td width="150">
+               <center><img class="img img-responsive" ng-src="{{user.pictureURL}}" style="max-width:100px"/></center>
+             </td>
+             <td ng-bind="user.google_id"></td>
+             <td ng-bind="user.token"></td>
+             <td ng-bind="user.refresh_token"></td>
+             <td ng-bind="user.name"></td>
+             <td ng-bind="user.email"></td>
+<!--              <td width="92px">
+              <a class="btn btn-danger pull-right" ng-click="deleteSupplier($index)"><i class="fa fa-trash"></i></a>
+              <a class="btn btn-default pull-right" href="#!/supplier/{{supplier.id}}"><i class="fa fa-pencil"></i></a>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+    <ng-include src="'Views/Shared/pagination.html'" scope="pages,currentPage,limit"></ng-include>
+  </div>
+  <!-- /.box -->
+</div>
+</div>
+
+</section>

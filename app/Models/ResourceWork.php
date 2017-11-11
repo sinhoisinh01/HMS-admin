@@ -19,4 +19,4 @@ class ResourceWork extends Model
 	{
 		return $this->belongsTo('App\Models\Resource');
 	}
-}
+} 

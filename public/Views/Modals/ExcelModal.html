@@ -1,0 +1,83 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" style="color:red; font-size:34px" ng-click="$dismiss()">&times;</button>
+	<h4>Bản xem trước</h4>
+</div>
+<div class="modal-body" style="overflow-y: auto; overflow-x: hidden;height:80%">
+	<div class="tab-content col-md-10">
+		<div id="{{$index}}" class="tab-pane fade in active" ng-repeat="exc in excel" ng-if="$first">
+			<div class="table-responsive" >
+				<table class="table table-bordered excel">
+					<thead>
+						<tr>
+							<th ng-repeat="heading in exc.heading">{{heading}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="excelRow in exc.sheet track by $index" ng-if="$index <= 50">
+							<td ng-repeat="excelCol in excelRow track by $index">{{excelCol}}</td>
+						</tr>
+						<tr style="height:100px" ng-if="exc.sheet.length > 50">
+							<td colspan="{{exc.heading.length}}" class="text-center" style="font-size:40px;background:white">.......................</td>
+						</tr>
+						<tr ng-repeat="excelRow in exc.sheet track by $index" ng-if="$index > 50 && $index >= exc.sheet.length - 50">
+							<td ng-repeat="excelCol in excelRow track by $index">{{excelCol}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div id="{{$index}}" class="tab-pane fade" ng-repeat="exc in excel" ng-if="!$first">
+			<div class="table-responsive" >
+				<table class="table table-bordered excel">
+					<thead>
+						<tr>
+							<th ng-repeat="heading in exc.heading">{{heading}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="excelRow in exc.sheet track by $index" ng-if="$index <= 50">
+							<td ng-repeat="excelCol in excelRow track by $index">{{excelCol}}</td>
+						</tr>
+						<tr style="height:100px" ng-if="exc.sheet.length > 50">
+							<td colspan="{{exc.heading.length}}" class="text-center" style="font-size:40px;background:white">.......................</td>
+						</tr>
+						<tr ng-repeat="excelRow in exc.sheet track by $index" ng-if="$index >= exc.sheet.length - 50">
+							<td ng-repeat="excelCol in excelRow track by $index">{{excelCol}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<h4><b>Xác định thông số</b></h4>
+		<hr />
+		<form class="form-inline">
+			<div class="form-group">
+				<label class="col-md-6">Dòng bắt đầu : </label>
+				<input type="number" class="col-md-3" ng-model="result.startRow"/>
+			</div>
+			<div class="form-group" style="margin-top:15px">
+				<label class="col-md-6">Dòng kết thúc : </label>
+				<input type="number" class="col-md-3" ng-model="result.endRow"/>
+			</div>
+		</form>
+		<hr />
+		<h4><b>Chọn cột</b></h4>
+		<div class="input-group" ng-repeat="need in needImport">
+
+			<span class="input-group-addon" ng-bind="need" style="background:#EEEEEE; min-width:50%"></span>
+			<input type="text" class="form-control" ng-model="result['col'][$index]">
+		</div>
+	</div>
+	<div class="col-md-12">
+		<ul class="nav nav-pills" style="padding-bottom:5px">
+			<li class="active info" ng-click="chooseSheet(sheetTitles[0])"><a data-toggle="pill" href="#0" ng-bind="sheetTitles[0]"></a></li>
+			<li class="info" ng-repeat="sheetTitle in sheetTitles track by $index" ng-click="chooseSheet($index)" ng-if="!$first"><a data-toggle="pill" href="#{{$index}}" ng-bind="sheetTitle"></a></li>
+		</ul>
+	</div>
+
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary pull-right" ng-click="$close(result)">Chấp nhận</button>
+</div>	

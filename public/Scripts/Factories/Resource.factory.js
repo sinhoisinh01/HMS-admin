@@ -4,14 +4,21 @@ if("undefined" !== typeof app){
       "add" : "resource",
       "addToSupplier" : "supplier/$1/resources",
       "search" : "resource/search?of=$1&keyword=$2&index=$3&limit=$4",
-      "delete" : "supplier/$1/resources",
+      "delete" : "supplier/$1/resource/$2",
       "getAll" : "supplier/$1/resources?index=$2&limit=$3",
-      "getPage" : "supplier/$1/resources/page/$2"
+      "getPage" : "supplier/$1/resources/page/$2",
+      "getOne" : "resource/$1"
     }
     return {
       getAll(supplierId, index, limit, cb){
-        console.log(supplierId);
         API.callAPI("get",Helper.fixUrlAPI(apiName.getAll,[supplierId, index, limit])).then(function success(res){
+          cb(res.data);
+        }, function error(err){
+          cb([]);
+        });
+      },
+      getOne(resourceId, cb){
+        API.callAPI("get",Helper.fixUrlAPI(apiName.getOne,[resourceId])).then(function success(res){
           cb(res.data);
         }, function error(err){
           cb([]);
@@ -56,8 +63,8 @@ if("undefined" !== typeof app){
           cb(err);
         });
       },
-      delete(supplierId, cb){
-        API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[supplierId])).then(function success(res){
+      delete(supplierId, resourceId, cb){
+        API.callAPI("delete",Helper.fixUrlAPI(apiName.delete,[supplierId, resourceId])).then(function success(res){
           cb(true);
         }, function error(err){
           cb(false);

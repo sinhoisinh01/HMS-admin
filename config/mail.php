@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' =>isset($_ENV["MAIL_DRIVER"]) ? $_ENV["MAIL_DRIVER"] : "smtp",
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' =>isset($_ENV["MAIL_HOST"]) ? $_ENV["MAIL_HOST"] : "smtp.mailgun.org",
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' =>isset($_ENV["MAIL_PORT"]) ? $_ENV["MAIL_PORT"] : 587,
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' =>isset($_ENV["MAIL_FROM_ADDRESS"]) ? $_ENV["MAIL_FROM_ADDRESS"] : "hello@example.com",
+        'name' =>isset($_ENV["MAIL_FROM_NAME"]) ? $_ENV["MAIL_FROM_NAME"] : "Example",
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' =>isset($_ENV["MAIL_ENCRYPTION"]) ? $_ENV["MAIL_ENCRYPTION"] : "tls",
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' =>isset($_ENV["MAIL_USERNAME"]) ? $_ENV["MAIL_USERNAME"] : "",
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' =>isset($_ENV["MAIL_PASSWORD"]) ? $_ENV["MAIL_PASSWORD"] : "",
 
     /*
     |--------------------------------------------------------------------------

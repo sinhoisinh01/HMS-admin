@@ -15,6 +15,7 @@ if("undefined" !== typeof app){
                         }   
                     }
                     else{
+                        console.log(data);
                         input.append("file",data);
                     }
                 }

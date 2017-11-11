@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return redirect('/index.html#!');
 });
+Route::get('/aaa', function () {
+    return base_path('routes/api.php');
+});

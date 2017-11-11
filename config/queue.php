@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => isset($_ENV["QUEUE_DRIVER"]) ? $_ENV["QUEUE_DRIVER"] : "sync",
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     */
 
     'failed' => [
-        'database' => env('DB_CONNECTION', 'mysql'),
+        'database' => isset($_ENV["DB_CONNECTION"]) ? $_ENV["DB_CONNECTION"] : "mysql",
         'table' => 'failed_jobs',
     ],
 

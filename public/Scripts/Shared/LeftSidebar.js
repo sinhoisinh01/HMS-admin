@@ -18,7 +18,7 @@ if("undefined" !== typeof app){
 		},
 		{ 
 			title : "Người dùng", iconClass : "fa fa-users", subMenus : [
-				{ title : "Xem người dùng", iconClass : "", link : "#!/category"}
+				{ title : "Xem người dùng", iconClass : "", link : "#!/user"}
 			]
 		},
 		]
